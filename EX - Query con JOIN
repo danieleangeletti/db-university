@@ -36,8 +36,8 @@ ANSWERS:
    INNER JOIN course_teacher
    ON course_teacher.teacher_id = courses.id
    INNER JOIN teachers
-   ON teachers.id = courses.id
-   AND teachers.id = 44;
+   ON teachers.id = course_teacher.teacher_id
+   WHERE teachers.id = 44;
 
 4. SELECT *
    FROM students
@@ -52,7 +52,7 @@ ANSWERS:
    INNER JOIN courses
    ON degrees.id = courses.degree_id
    INNER JOIN course_teacher
-   ON teacher_id = courses.id
+   ON course_teacher.course_id = courses.id
    INNER JOIN teachers
    ON teachers.id = course_teacher.teacher_id;
 
@@ -71,4 +71,4 @@ ANSWERS:
    ON degrees.id = courses.degree_id
    INNER JOIN departments
    ON departments.id = degrees.department_id
-   WHERE degrees.department_id = 5; 
+   WHERE degrees.department_id = 5;
