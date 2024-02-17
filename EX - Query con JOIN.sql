@@ -56,7 +56,8 @@ ANSWERS:
    INNER JOIN teachers
    ON teachers.id = course_teacher.teacher_id;
 
-6. SELECT 
+6. SELECT
+   DISTINCT
    teachers.name, 
    teachers.surname,
    courses.name AS course_name,
@@ -72,3 +73,15 @@ ANSWERS:
    INNER JOIN departments
    ON departments.id = degrees.department_id
    WHERE degrees.department_id = 5;
+
+7. SELECT students.id, students.name, students.surname, courses.name as course_name, COUNT(exams.id) as number_of_attempts, MAX(exam_student.vote) as maximum_rating
+   FROM students
+   INNER JOIN exam_student
+   ON students.id = exam_student.student_id
+   INNER JOIN exams
+   ON exam_student.exam_id = exams.id
+   INNER JOIN courses
+   ON exams.course_id = courses.id
+   GROUP BY students.id, students.name, students.surname, courses.name
+   HAVING MAX(exam_student.vote) >= 18
+   ORDER BY students.id;
